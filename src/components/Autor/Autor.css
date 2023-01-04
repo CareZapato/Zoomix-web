@@ -1,0 +1,11 @@
+.autor {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 150%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-bottom: 2%;
+    padding-right: 2%;
+}

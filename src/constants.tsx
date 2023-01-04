@@ -1,0 +1,1 @@
+export const OPACITY_PERCENTAGE = 0.05;

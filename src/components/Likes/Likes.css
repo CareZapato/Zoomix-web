@@ -1,0 +1,16 @@
+.likes {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-size: 200%;
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    font-family: Impact, sans-serif;
+}
+
+.likes img {
+    width: 20%;
+    height: 20%;
+}
