@@ -1,22 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import Question from './components/Question';
+import { useState, useEffect } from 'react';
+import { Pregunta } from './models/Pregunta/Pregunta';
+import { nuevaPregunta } from './Services/PreguntaServices';
 
-const App = () => {
-  const questions = ['¿Cuál es tu animal favorito?', '¿Cuál es tu comida favorita? ¿Cuál es tu comida favorita? ¿Cuál es tu comida favorita?', '¿Cuál es tu lugar favorito para viajar?'];
-  const creators = ['Juan', 'Ana', 'Pedro'];
-  const likes = [10, 20, 30];
-  const backgroundColors = ['blue', 'green', 'red'];
+const ExampleComponent = () => {
+  const [pregunta, setPregunta] = useState<Pregunta | null>(null);
+  
+  useEffect(() => {
+    const fetchNewQuestion = async () => {
+      const data = await nuevaPregunta();
+      setPregunta(data);
+    };
 
+    fetchNewQuestion();
+  }, []);
+
+  if (!pregunta) {
+    return <div>Cargando pregunta...</div>;
+  }
+  
   return (
     <div>
-      <Question
-        questions={questions}
-        creators={creators}
-        likes={likes}
-        backgroundColors={backgroundColors}
-      />
+      { pregunta ? (
+        <div>
+          <Question
+            questions={pregunta.texto}
+            creators={pregunta.jugador.nombre}
+            likes={pregunta.likes}
+            backgroundColors={pregunta.categoria.color.nombre}
+          />
+        </div>
+      ) : (
+        <p>Cargando datos...</p>
+      ) }
     </div>
   );
 };
