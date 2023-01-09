@@ -6,20 +6,21 @@ import Likes from "./Likes/Likes";
 import Autor from "./Autor/Autor";
 
 type Props = {
-  questions: string[];
-  creators: string[];
-  likes: number[];
-  backgroundColors: string[];
+  question: string;
+  creator: string;
+  likes: number;
+  backgroundColor: string;
+  updateQuestion: () => void;
 };
 
-const Question = ({ questions, creators, likes, backgroundColors }: Props) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+const Question = ({ question, creator, likes, backgroundColor, updateQuestion }: Props) => {
   const [isActive, setIsActive] = useState(true);
 
   const handleClick = () => {
     setIsActive(false);
       setTimeout(() => {
-      setCurrentQuestion((currentQuestion + 1) % questions.length);
+        updateQuestion();
+      // Aquí se podría realizar una llamada a la función que obtiene la siguiente pregunta
     }, 500); // duración de la animación en milisegundos
   };
 
@@ -35,20 +36,21 @@ const Question = ({ questions, creators, likes, backgroundColors }: Props) => {
     <>
       <div className="black-screen" />
       <div style={{ 
-        backgroundColor: backgroundColors[currentQuestion],
+        backgroundColor: backgroundColor,
         opacity: isActive ? 1 : OPACITY_PERCENTAGE,
         transition: "opacity 500ms", 
       }} onClick={handleClick}>
         <div className="question" >
-            {questions[currentQuestion]}
+            {question}
         </div>
         <footer>
-          <Likes likes={likes[currentQuestion]} />
-          <Autor autor={creators[currentQuestion]} />
+          <Likes likes={likes} />
+          <Autor autor={creator} />
         </footer>
       </div>
       </>
   );
 };
+
 
 export default Question;

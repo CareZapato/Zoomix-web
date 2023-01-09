@@ -5,16 +5,22 @@ import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
 import { nuevaPregunta } from './Services/PreguntaServices';
 
-const ExampleComponent = () => {
-  const [pregunta, setPregunta] = useState<Pregunta | null>(null);
+const App = () => {
   
-  useEffect(() => {
-    const fetchNewQuestion = async () => {
-      const data = await nuevaPregunta();
-      setPregunta(data);
-    };
+  const [pregunta, setPregunta] = useState<Pregunta | null>(null);
+  useEffect(function () {
+    console.log('render!')
+  })
 
-    fetchNewQuestion();
+  const updateQuestion = async () => {
+    const pregunta = await nuevaPregunta();
+    if(pregunta){
+      setPregunta(pregunta);
+    }
+  };
+
+  useEffect(() => {
+    updateQuestion();
   }, []);
 
   if (!pregunta) {
@@ -26,10 +32,11 @@ const ExampleComponent = () => {
       { pregunta ? (
         <div>
           <Question
-            questions={pregunta.texto}
-            creators={pregunta.jugador.nombre}
+            question={pregunta.texto}
+            creator={pregunta.jugador.nombre}
             likes={pregunta.likes}
-            backgroundColors={pregunta.categoria.color.nombre}
+            backgroundColor={pregunta.categoria.color.nombre}
+            updateQuestion={updateQuestion}
           />
         </div>
       ) : (
