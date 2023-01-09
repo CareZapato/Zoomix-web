@@ -11,6 +11,17 @@ const nuevaPregunta = async () => {
   }
 }
 
+const agregarPregunta = async (pregunta: Pregunta) => {
+  try {
+    const response: AxiosResponse<Pregunta> = await axios.get('http://localhost:8080/pregunta/nuevaPregunta');
+    console.log(new Pregunta(response.data));
+    return new Pregunta(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export {
-    nuevaPregunta
+    nuevaPregunta,
+    agregarPregunta
 }

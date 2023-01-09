@@ -4,6 +4,7 @@ import Question from './components/Question';
 import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
 import { nuevaPregunta } from './Services/PreguntaServices';
+import MenuSuperior from './components/MenuSuperior/MenuSuperior';
 
 const App = () => {
   
@@ -31,11 +32,12 @@ const App = () => {
     <div>
       { pregunta ? (
         <div>
+          <MenuSuperior />
           <Question
             question={pregunta.texto}
-            creator={pregunta.jugador.nombre}
+            creator={pregunta.jugador?.nombre}
             likes={pregunta.likes}
-            backgroundColor={pregunta.categoria.color.nombre}
+            backgroundColor={pregunta.categoria?.color?.nombre}
             updateQuestion={updateQuestion}
           />
         </div>

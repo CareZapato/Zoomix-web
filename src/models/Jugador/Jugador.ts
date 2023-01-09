@@ -1,18 +1,18 @@
 export class Jugador {
-    jugadorId: number;
-    nombre: string;
-    nick: string;
-    facebookId: string | null;
-    createdAt: Date;
-    updatedAt: Date;
+    jugadorId?: number;
+    nombre?: string;
+    nick?: string;
+    facebookId?: string | null;
+    createdAt?: Date;
+    updatedAt?: Date;
     
     constructor(
-      jugadorId: number,
-      nombre: string,
-      nick: string,
-      facebookId: string | null,
-      createdAt: Date,
-      updatedAt: Date
+      jugadorId?: number,
+      nombre?: string,
+      nick?: string,
+      facebookId?: string | null,
+      createdAt?: Date,
+      updatedAt?: Date
     ) {
       this.jugadorId = jugadorId;
       this.nombre = nombre;

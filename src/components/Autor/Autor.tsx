@@ -2,7 +2,7 @@ import React from "react";
 import "./Autor.css";
 
 type Props = {
-  autor: string;
+  autor?: string;
 };
 
 const Autor = ({ autor }: Props) => {

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import "./Question.css";
-import { CSSTransition } from "react-transition-group";
 import { OPACITY_PERCENTAGE } from "../constants";
 import Likes from "./Likes/Likes";
 import Autor from "./Autor/Autor";
+import MenuSuperior from './MenuSuperior/MenuSuperior';
 
 type Props = {
-  question: string;
-  creator: string;
-  likes: number;
-  backgroundColor: string;
+  question?: string;
+  creator?: string;
+  likes?: number;
+  backgroundColor?: string;
   updateQuestion: () => void;
 };
 
@@ -40,12 +40,13 @@ const Question = ({ question, creator, likes, backgroundColor, updateQuestion }:
         opacity: isActive ? 1 : OPACITY_PERCENTAGE,
         transition: "opacity 500ms", 
       }} onClick={handleClick}>
+        <MenuSuperior />
         <div className="question" >
             {question}
         </div>
         <footer>
-          <Likes likes={likes} />
-          <Autor autor={creator} />
+          <Likes likes={likes ? likes : undefined} />
+          <Autor autor={creator ? creator : undefined} />
         </footer>
       </div>
       </>

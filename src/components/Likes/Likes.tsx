@@ -3,7 +3,7 @@ import "./Likes.css";
 import img_like from "../../img/like.png"
 
 type Props = {
-  likes: number;
+  likes?: number;
 };
 
 const Likes = ({ likes }: Props) => {
