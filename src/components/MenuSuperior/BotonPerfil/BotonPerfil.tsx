@@ -7,9 +7,12 @@ type Props = {
 
 const BotonPerfil = ({ onClick }: Props) => {
   return (
-    <div className="boton-perfil" onClick={onClick}>
-      <i className="fas fa-user"></i>
-    </div>
+    <button
+      className="boton-perfil"
+      onClick={onClick}
+    >
+      Perfil
+    </button>
   );
 };
 

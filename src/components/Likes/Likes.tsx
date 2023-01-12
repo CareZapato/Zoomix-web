@@ -7,6 +7,11 @@ type Props = {
 };
 
 const Likes = ({ likes }: Props) => {
+
+  const valorMenu = () => {
+    return 3;
+  }
+
   return (
     <div className="likes">
         {likes} <img src={img_like} />

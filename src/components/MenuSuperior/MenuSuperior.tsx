@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import BotonMenuPrincipal from './BotonMenuPrincipal/BotonMenuPrincipal';
 import BotonPerfil from './BotonPerfil/BotonPerfil';
 import "./MenuSuperior.css";
-const MenuSuperior = () => {
 
-    const BotonMenuPrincipalHandleClick = () => {
-        console.log("BotonMenuPrincipalHandleClick");
-    }
+type Props = {
+    //onClick: () => void;
+    BotonMenuPrincipalHandleClick: () => void;
+    BotonPerfilHandleClick: () => void;
+}
 
-    const BotonPerfilHandleClick = () => {
-        console.log("BotonPerfilHandleClick");
-    }
+const MenuSuperior = ({ BotonMenuPrincipalHandleClick, BotonPerfilHandleClick }: Props) => {
+    
 
     return (
         <div className="menu-superior">

@@ -6,10 +6,14 @@ type Props = {
 }
 
 const BotonMenuPrincipal = ({ onClick }: Props) => {
+
   return (
-    <div className="boton-menu-principal" onClick={onClick}>
-      <i className="fas fa-home">hola</i>
-    </div>
+    <button
+      className="boton-menu-principal"
+      onClick={onClick}
+    >
+      Menu Principal
+    </button>
   );
 };
 

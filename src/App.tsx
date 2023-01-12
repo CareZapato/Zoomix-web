@@ -9,9 +9,6 @@ import MenuSuperior from './components/MenuSuperior/MenuSuperior';
 const App = () => {
   
   const [pregunta, setPregunta] = useState<Pregunta | null>(null);
-  useEffect(function () {
-    console.log('render!')
-  })
 
   const updateQuestion = async () => {
     const pregunta = await nuevaPregunta();
@@ -19,6 +16,14 @@ const App = () => {
       setPregunta(pregunta);
     }
   };
+
+  const menuPrincipal = () => {
+    console.log("Menu Principal");
+  }
+
+  const menuPerfil = () => {
+    console.log("menu Perfil");
+  }
 
   useEffect(() => {
     updateQuestion();
@@ -30,15 +35,17 @@ const App = () => {
   
   return (
     <div>
-      { pregunta ? (
+      { 
+      pregunta ? (
         <div>
-          <MenuSuperior />
           <Question
             question={pregunta.texto}
             creator={pregunta.jugador?.nombre}
             likes={pregunta.likes}
             backgroundColor={pregunta.categoria?.color?.nombre}
             updateQuestion={updateQuestion}
+            BotonMenuPrincipalHandleClick={menuPrincipal}
+            BotonPerfilHandleClick={menuPerfil}
           />
         </div>
       ) : (

@@ -11,14 +11,17 @@ type Props = {
   likes?: number;
   backgroundColor?: string;
   updateQuestion: () => void;
+  BotonMenuPrincipalHandleClick: () => void;
+  BotonPerfilHandleClick:() => void;
 };
 
-const Question = ({ question, creator, likes, backgroundColor, updateQuestion }: Props) => {
+const Question = ({ question, creator, likes, backgroundColor, updateQuestion,BotonMenuPrincipalHandleClick,BotonPerfilHandleClick}: Props) => {
   const [isActive, setIsActive] = useState(true);
 
   const handleClick = () => {
     setIsActive(false);
       setTimeout(() => {
+        console.log("desde componente Question");
         updateQuestion();
       // Aquí se podría realizar una llamada a la función que obtiene la siguiente pregunta
     }, 500); // duración de la animación en milisegundos
@@ -40,7 +43,10 @@ const Question = ({ question, creator, likes, backgroundColor, updateQuestion }:
         opacity: isActive ? 1 : OPACITY_PERCENTAGE,
         transition: "opacity 500ms", 
       }} onClick={handleClick}>
-        <MenuSuperior />
+        <MenuSuperior 
+          BotonMenuPrincipalHandleClick = {BotonMenuPrincipalHandleClick}
+          BotonPerfilHandleClick = {BotonPerfilHandleClick}
+        />
         <div className="question" >
             {question}
         </div>
