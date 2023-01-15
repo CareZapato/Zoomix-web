@@ -1,17 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AgregarPregunta.css';
 import { agregarPregunta } from '../../Services/PreguntaServices';
+import { getListaCategorias } from '../../Services/CategoriaServices';
 import { Pregunta } from '../../models/Pregunta/Pregunta';
 import { Categoria } from '../../models/Categoria/Categoria';
 
 interface Props {
-  onAgregarPregunta: () => void;
 }
 
-const AgregarPregunta: React.FC<Props> = ({ onAgregarPregunta }) => {
+const AgregarPregunta: React.FC<Props> = ({  }) => {
   const [texto, setTexto] = useState('');
   const [categoriaId, setCategoriaId] = useState(1);
   const [jugadorId, setJugadorId] = useState(1);
+
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
+
+  const fetchCategorias = async () => {
+    const data = await getListaCategorias();
+    if(data){
+      setCategorias(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategorias();
+  }, [categorias]);
+
+  const options = [
+    {id: 1, name: 'Conocer'},
+    {id: 2, name: 'Diversión'},
+    {id: 3, name: 'Otros'}
+  ];
+  
 
   const handleTextoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTexto(event.target.value);
@@ -40,7 +60,8 @@ const AgregarPregunta: React.FC<Props> = ({ onAgregarPregunta }) => {
       },
     };
     agregarPregunta(json).then(() => {
-      onAgregarPregunta();
+
+      // onAgregarPregunta();
     });
   };
 
@@ -57,10 +78,10 @@ const AgregarPregunta: React.FC<Props> = ({ onAgregarPregunta }) => {
       />
       <label htmlFor="categoriaId">Categoría</label>
       <select id="categoriaId" value={categoriaId} onChange={handleCategoriaIdChange}>
-        <option value={1}>Conocer</option>
-        <option value={2}>Diversión</option>
-        <option value={3}>Otros</option>
-      </select>
+      {categorias.map((categoria) => {
+        return <option key={categoria.categoriaId} value={categoria.categoriaId}>{categoria.nombre}</option>
+      })}
+    </select>
     </form>
   );
 }

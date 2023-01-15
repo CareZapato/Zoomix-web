@@ -1,11 +1,11 @@
 import React from 'react';
-import './BotonMenuPrincipal.css';
+import './BotonAgregarPregunta.css';
 
 type Props = {
   onClick: () => void;
 }
 
-const BotonMenuPrincipal = ({ onClick }: Props) => {
+const BotonAgregarPregunta = ({ onClick }: Props) => {
 
   function handleClick(e: { stopPropagation: () => void; }) { 
     e.stopPropagation();
@@ -14,12 +14,12 @@ const BotonMenuPrincipal = ({ onClick }: Props) => {
 
   return (
     <button
-      className="boton-menu-principal"
+      className="boton-agregar-pregunta"
       onClick={handleClick}
     >
-      Menu Principal
+      Agregar Pregunta
     </button>
   );
 };
 
-export default BotonMenuPrincipal;
+export default BotonAgregarPregunta;

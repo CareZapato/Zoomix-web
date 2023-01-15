@@ -6,10 +6,16 @@ type Props = {
 }
 
 const BotonPerfil = ({ onClick }: Props) => {
+
+  function handleClick(e: { stopPropagation: () => void; }) { 
+      e.stopPropagation();
+      onClick();
+  } 
+
   return (
     <button
       className="boton-perfil"
-      onClick={onClick}
+      onClick={handleClick}
     >
       Perfil
     </button>
