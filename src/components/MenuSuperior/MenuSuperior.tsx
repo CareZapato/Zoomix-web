@@ -6,14 +6,18 @@ import "./MenuSuperior.css";
 
 type Props = {
     //onClick: () => void;
+    currentScreen: number;
     BotonMenuPrincipalHandleClick: () => void;
     BotonPerfilHandleClick: () => void;
     BotonAgregarPreguntaHandleClick: () => void;
 }
 
-const MenuSuperior = ({ BotonMenuPrincipalHandleClick, BotonPerfilHandleClick, BotonAgregarPreguntaHandleClick }: Props) => {
-    
-
+const MenuSuperior = ({ 
+    BotonMenuPrincipalHandleClick, 
+    BotonPerfilHandleClick, 
+    BotonAgregarPreguntaHandleClick, 
+    currentScreen }: Props
+) => {
     return (
         <div className="menu-superior">
             <BotonMenuPrincipal 

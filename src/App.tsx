@@ -5,11 +5,12 @@ import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
 import { nuevaPregunta } from './Services/PreguntaServices';
 import AgregarPregunta from './components/AgregarPregunta/AgregarPregunta';
+import PantallaPrincipal from './components/PantallaPrincipal/PantallaPrincipal';
 
 const App = () => {
   
   const [pregunta, setPregunta] = useState<Pregunta | null>(null);
-  const [pantalla, setPantalla] = useState(2);
+  const [pantalla, setPantalla] = useState(1);
 
 
   const updateQuestion = async () => {
@@ -34,6 +35,11 @@ const App = () => {
     setPantalla(5);
   }
 
+  const handleCategoriaSel = (cat:number) => {
+    console.log("handleCategoriaSel: ",cat);
+    return 1;
+  }
+
 
   useEffect(() => {
     console.log("pantalla:",pantalla);
@@ -49,6 +55,14 @@ const App = () => {
     return <div>Cargando pregunta...</div>;
   }else{
     switch (pantalla) {
+      case 1:
+        return (
+          <div>
+            <PantallaPrincipal
+              categoriaSel={handleCategoriaSel}
+            />
+          </div>
+        ); 
       case 2:
         return (
           <div>
@@ -79,7 +93,11 @@ const App = () => {
       case 5:
         return (
           <div>
-            <AgregarPregunta />
+            <AgregarPregunta
+              BotonMenuPrincipalHandleClick={menuPrincipal}
+              BotonPerfilHandleClick={menuPerfil}
+              BotonAgregarPreguntaHandleClick={agregarPregunta}
+            />
           </div>
         );
       default:

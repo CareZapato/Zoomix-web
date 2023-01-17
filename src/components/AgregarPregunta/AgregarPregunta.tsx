@@ -4,11 +4,19 @@ import { agregarPregunta } from '../../Services/PreguntaServices';
 import { getListaCategorias } from '../../Services/CategoriaServices';
 import { Pregunta } from '../../models/Pregunta/Pregunta';
 import { Categoria } from '../../models/Categoria/Categoria';
+import MenuSuperior from '../MenuSuperior/MenuSuperior';
 
 interface Props {
+  BotonMenuPrincipalHandleClick: () => void;
+  BotonPerfilHandleClick:() => void;
+  BotonAgregarPreguntaHandleClick: () => void;
 }
 
-const AgregarPregunta: React.FC<Props> = ({  }) => {
+const AgregarPregunta: React.FC<Props> = ({ 
+  BotonMenuPrincipalHandleClick,
+  BotonPerfilHandleClick,
+  BotonAgregarPreguntaHandleClick 
+}) => {
   const [texto, setTexto] = useState('');
   const [categoriaId, setCategoriaId] = useState(1);
   const [jugadorId, setJugadorId] = useState(1);
@@ -23,15 +31,10 @@ const AgregarPregunta: React.FC<Props> = ({  }) => {
   };
 
   useEffect(() => {
-    fetchCategorias();
-  }, [categorias]);
-
-  const options = [
-    {id: 1, name: 'Conocer'},
-    {id: 2, name: 'Diversión'},
-    {id: 3, name: 'Otros'}
-  ];
-  
+    if(categorias.length == 0){
+      fetchCategorias();
+    }
+  }, [categorias]);  
 
   const handleTextoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTexto(event.target.value);
@@ -60,29 +63,38 @@ const AgregarPregunta: React.FC<Props> = ({  }) => {
       },
     };
     agregarPregunta(json).then(() => {
-
       // onAgregarPregunta();
     });
   };
 
   return (
-    <form className="agregar-pregunta" onSubmit={handleSubmit}>
-      <h1>Agregar Pregunta</h1>
-      <label htmlFor="texto">Texto</label>
-      <input
-        type="text"
-        id="texto"
-        maxLength={100}
-        value={texto}
-        onChange={handleTextoChange}
+    <>
+    <div className="container">
+      <MenuSuperior 
+        BotonMenuPrincipalHandleClick = {BotonMenuPrincipalHandleClick}
+        BotonPerfilHandleClick = {BotonPerfilHandleClick}
+        BotonAgregarPreguntaHandleClick ={BotonAgregarPreguntaHandleClick}
+        currentScreen = {2}
       />
-      <label htmlFor="categoriaId">Categoría</label>
-      <select id="categoriaId" value={categoriaId} onChange={handleCategoriaIdChange}>
-      {categorias.map((categoria) => {
-        return <option key={categoria.categoriaId} value={categoria.categoriaId}>{categoria.nombre}</option>
-      })}
-    </select>
-    </form>
+      <form className="agregar-pregunta form-container" onSubmit={handleSubmit}>
+        <h1>Agregar Pregunta</h1>
+        <label htmlFor="texto">Texto</label>
+        <textarea
+          id="texto"
+          rows={2}
+          maxLength={100}
+          value={texto}
+        />
+        <label htmlFor="categoriaId">Categoría</label>
+        <select id="categoriaId" value={categoriaId} onChange={handleCategoriaIdChange}>
+          {categorias.map((categoria) => {
+            return <option key={categoria.categoriaId} value={categoria.categoriaId}>{categoria.nombre}</option>
+          })}
+        </select>
+        <button className="submit-button" type="submit">Enviar</button>
+      </form>
+      </div>
+    </>
   );
 }
 

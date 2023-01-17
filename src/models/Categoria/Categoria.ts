@@ -10,12 +10,12 @@ export class Categoria {
 
     constructor(
         categoria: Categoria
-      ) {
+    ) {
         this.categoriaId = categoria.categoriaId;
         this.nombre = categoria.nombre;
         this.descripcion = categoria.descripcion;
         this.createdAt = categoria.createdAt;
         this.updatedAt = categoria.updatedAt;
         this.color = categoria.color;
-      }
+    }
 }

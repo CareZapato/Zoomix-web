@@ -1,9 +1,10 @@
 import { Pregunta } from '../models/Pregunta/Pregunta';
 import axios, { AxiosResponse } from 'axios';
+import { urlBase } from '../const';
 
 const nuevaPregunta = async () => {
   try {
-    const response: AxiosResponse<Pregunta> = await axios.get('http://localhost:8080/pregunta/nuevaPregunta');
+    const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/pregunta/nuevaPregunta');
     console.log(new Pregunta(response.data));
     return new Pregunta(response.data);
   } catch (error) {
@@ -11,13 +12,18 @@ const nuevaPregunta = async () => {
   }
 }
 
-const agregarPregunta = async (pregunta: Pregunta) => {
+async function agregarPregunta(pregunta:Pregunta){
   try {
-    const response: AxiosResponse<Pregunta> = await axios.get('http://localhost:8080/pregunta/nuevaPregunta');
-    console.log(new Pregunta(response.data));
-    return new Pregunta(response.data);
+    const response = await fetch(
+      urlBase+'/categoria/categorias',
+      {method: 'POST',
+      body: JSON.stringify(pregunta)
+    });
+    const data = await response.json();
+    return data as Pregunta;
   } catch (error) {
     console.error(error);
+    return undefined;
   }
 }
 

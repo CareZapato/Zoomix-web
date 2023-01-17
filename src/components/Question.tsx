@@ -58,6 +58,7 @@ const Question = (
           BotonMenuPrincipalHandleClick = {BotonMenuPrincipalHandleClick}
           BotonPerfilHandleClick = {BotonPerfilHandleClick}
           BotonAgregarPreguntaHandleClick ={BotonAgregarPreguntaHandleClick}
+          currentScreen = {1}
         />
         <div className="question" >
             {question}
