@@ -12,6 +12,16 @@ const nuevaPregunta = async () => {
   }
 }
 
+const nuevaPreguntaCategoria = async (categoria: number) => {
+  try {
+    const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/pregunta/nuevaPregunta/'+categoria);
+    console.log(new Pregunta(response.data));
+    return new Pregunta(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function agregarPregunta(pregunta:Pregunta){
   try {
     const response = await fetch(
@@ -29,5 +39,6 @@ async function agregarPregunta(pregunta:Pregunta){
 
 export {
     nuevaPregunta,
-    agregarPregunta
+    agregarPregunta,
+    nuevaPreguntaCategoria
 }

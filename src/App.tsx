@@ -3,18 +3,20 @@ import './App.css';
 import Question from './components/Question';
 import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
-import { nuevaPregunta } from './Services/PreguntaServices';
+import { nuevaPregunta, nuevaPreguntaCategoria } from './Services/PreguntaServices';
 import AgregarPregunta from './components/AgregarPregunta/AgregarPregunta';
 import PantallaPrincipal from './components/PantallaPrincipal/PantallaPrincipal';
+import Perfil from './components/Perfil/Perfil';
 
 const App = () => {
   
   const [pregunta, setPregunta] = useState<Pregunta | null>(null);
   const [pantalla, setPantalla] = useState(1);
+  const [categoria, setCategoria] = useState(0);
 
 
   const updateQuestion = async () => {
-    const pregunta = await nuevaPregunta();
+    const pregunta = categoria != 0 ? await nuevaPreguntaCategoria(categoria) : await nuevaPregunta() ;
     if(pregunta){
       setPregunta(pregunta);
     }
@@ -22,7 +24,7 @@ const App = () => {
 
   const menuPrincipal = () => {
     console.log("Menu Principal");
-    setPantalla(3);
+    setPantalla(1);
   }
 
   const menuPerfil = () => {
@@ -37,13 +39,14 @@ const App = () => {
 
   const handleCategoriaSel = (cat:number) => {
     console.log("handleCategoriaSel: ",cat);
-    return 1;
+    setCategoria(cat);
+    updateQuestion();
+    setPantalla(2);
   }
-
 
   useEffect(() => {
     console.log("pantalla:",pantalla);
-    if(pantalla){
+    if(pantalla == 2){
       updateQuestion();
     }else{
       console.log("cambiar Pantalla");
@@ -51,57 +54,68 @@ const App = () => {
   }, [pantalla]);
 
 
-  if (!pregunta) {
-    return <div>Cargando pregunta...</div>;
-  }else{
+  if(!pantalla){
+    return (<div>Espere por favor ...</div>)
+  }
+  else{
     switch (pantalla) {
-      case 1:
-        return (
-          <div>
-            <PantallaPrincipal
-              categoriaSel={handleCategoriaSel}
-            />
-          </div>
-        ); 
-      case 2:
-        return (
-          <div>
-            <Question
-              question={pregunta.texto}
-              creator={pregunta.jugador?.nombre}
-              likes={pregunta.likes}
-              backgroundColor={pregunta.categoria?.color?.nombre}
-              updateQuestion={updateQuestion}
-              BotonMenuPrincipalHandleClick={menuPrincipal}
-              BotonPerfilHandleClick={menuPerfil}
-              BotonAgregarPreguntaHandleClick={agregarPregunta}
-            />
-          </div>
-        ); 
-      case 3:
-        return (
-          <div>
-            Menú Principal ... 
-          </div>
-        );
-      case 4:
-        return (
-          <div>
-            Perfil ... 
-          </div>
-        );
-      case 5:
-        return (
-          <div>
-            <AgregarPregunta
-              BotonMenuPrincipalHandleClick={menuPrincipal}
-              BotonPerfilHandleClick={menuPerfil}
-              BotonAgregarPreguntaHandleClick={agregarPregunta}
-            />
-          </div>
-        );
-      default:
-        return <div> Cargando pantalla ... </div>
+        case 1:
+          return (
+            <div>
+              <PantallaPrincipal
+                categoriaSel={handleCategoriaSel}
+              />
+            </div>
+          ); 
+        case 2:
+          if (!pregunta) {
+            return <div>Cargando pregunta...</div>;
+          }else{
+          return (
+            <div>
+              <Question
+                question={pregunta.texto}
+                creator={pregunta.jugador?.nombre}
+                likes={pregunta.likes}
+                backgroundColor={pregunta.categoria?.color?.nombre}
+                updateQuestion={updateQuestion}
+                BotonMenuPrincipalHandleClick={menuPrincipal}
+                BotonPerfilHandleClick={menuPerfil}
+                BotonAgregarPreguntaHandleClick={agregarPregunta}
+              />
+            </div>
+          ); 
+        }
+          
+        case 3:
+          return (
+            <div>
+              Menú Principal ... 
+            </div>
+          );
+        case 4:
+          return (
+            <div>
+              <Perfil
+                  userName="John Doe"
+                  userImage="https://example.com/user-image.jpg"
+                  userQuestions={10}
+                  userLikes={50}
+              />
+            </div>
+          );
+        case 5:
+          return (
+            <div>
+              <AgregarPregunta
+                BotonMenuPrincipalHandleClick={menuPrincipal}
+                BotonPerfilHandleClick={menuPerfil}
+                BotonAgregarPreguntaHandleClick={agregarPregunta}
+              />
+            </div>
+          );
+        default:
+          return <div> Cargando pantalla ... </div>
     }
   }
 };

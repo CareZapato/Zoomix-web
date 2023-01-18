@@ -24,7 +24,7 @@ const Question = (
     updateQuestion,
     BotonMenuPrincipalHandleClick,
     BotonPerfilHandleClick,
-    BotonAgregarPreguntaHandleClick
+    BotonAgregarPreguntaHandleClick,
   }
   : Props) => {
   const [isActive, setIsActive] = useState(true);
