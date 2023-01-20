@@ -1,3 +1,42 @@
+@keyframes rainbow {
+    0% {
+        color: white;
+    }
+    100% {
+        color: white;
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff7f00, 0 0 30px #ffff00, 0 0 40px #00ff00, 0 0 50px #0000ff, 0 0 60px #4b0082, 0 0 70px #9400d3;
+    }
+}
+
+@keyframes rainbow-return {
+    0% {
+        color: white;
+        text-shadow: 0 0 8px #ff0000, 0 0 13px #ff7f00, 0 0 25px #ffff00, 0 0 32px #00ff00, 0 0 42px #0000ff, 0 0 50px #4b0082, 0 0 58px #9400d3;
+    
+    }
+    100% {
+        color: white;
+    }
+}
+
+@keyframes text-size {
+    0% {
+        font-size: 92px;
+    }
+    100% {
+        font-size: 93px;
+    }
+}
+
+@keyframes text-return {
+    0% {
+        font-size: 93px;
+    }
+    100% {
+        font-size: 92px;
+    }
+}
+
 .game-screen {
     display: flex;
     justify-content: center;
@@ -10,13 +49,26 @@
       flex-direction: column;
       align-items: center;
 }
-  
+
 .game-title {
     font-size: 92px;
     margin-bottom: 20px;
     text-shadow: 2px 2px 2px black;
     font-family: 'Press Start 2P', cursive;
+    padding-bottom: 15%;
+    animation:  rainbow 5s linear infinite alternate, 
+                text-size 3s linear 1s infinite alternate;
 }
+  
+/* .game-title {
+    color: white;
+    -webkit-text-stroke: 3.5px black;
+    font-size: 92px;
+    margin-bottom: 20px;
+    font-family: 'Press Start 2P', cursive;
+    padding-bottom: 15%;
+    
+} */
   
 .category-container {
     display: flex;
@@ -26,23 +78,43 @@
 }
   
 .category-button {
+    color: white;
+    -webkit-text-stroke: 1.1px black;
     padding: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     width: 200px;
     font-size: 18px;
-    border-radius: 10px;
-    font-family: 'Press Start 2P', cursive;
+    border-radius: 35px;
+    border-width: 5px;
+    font-family: 'Arial Black', cursive;
+    box-shadow: 0px 0px 15px #3b3b3b;
+    border-width: 3.1px 2.3px 4px 3.8px;
+    border-radius: 81% 2.8% 97% 5%/4% 94% 3% 95%;
+    transform: rotate(0.1deg);
 }
-  
-.button1{
-    background-color: #F44336;
-    color:white;
+
+.category-button-mouse-hovered {
+    color: white;
+    -webkit-text-stroke: 1.1px black;
+    padding: 25px;
+    width: 200px;
+    margin-bottom: 15px;
+    font-size: 21px;
+    border-radius: 35px;
+    border-width: 5px;
+    font-family: 'Arial Black', cursive;
+    box-shadow: 0px 0px 32px #8f8f8f;
+    border-width: 3.1px 2.3px 4px 3.8px;
+    border-radius: 84% 3.2% 95% 5%/4% 94% 3% 95%;
+    transform: rotate(-0.8deg);
+    width: 70%;
 }
-.button2{
-    background-color: #4CAF50;
-    color:white;
-}
-.button3{
-    background-color: #3F51B5;
-    color:white;
+
+.footer-version {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 12px;
+    text-align: right;
 }

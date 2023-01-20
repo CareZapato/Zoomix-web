@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './Perfil.css'
 interface Props {
   userName: string;
   userImage: string;
@@ -9,11 +9,13 @@ interface Props {
 
 const Perfil: React.FC<Props> = ({ userName, userImage, userQuestions, userLikes }) => {
   return (
-    <div>
-      <img src={userImage} alt={userName} />
-      <p>Nombre de usuario: {userName}</p>
-      <p>Preguntas totales: {userQuestions}</p>
-      <p>Likes totales: {userLikes}</p>
+    <div className="profile-container">
+      <img className="profile-img" src={userImage} alt={userName} />
+      <p className="profile-name">Nombre de usuario: {userName}</p>
+      <div className="profile-stats">
+        <p className="profile-stat">Preguntas totales: {userQuestions}</p>
+        <p className="profile-stat">Likes totales: {userLikes}</p>
+      </div>
     </div>
   );
 };

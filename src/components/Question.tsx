@@ -64,7 +64,7 @@ const Question = (
             {question}
         </div>
         <footer>
-          <Likes likes={likes ? likes : undefined} />
+          <Likes color={backgroundColor} likes={likes ? likes : undefined} />
           <Autor autor={creator ? creator : undefined} />
         </footer>
       </div>

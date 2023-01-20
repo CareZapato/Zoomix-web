@@ -45,11 +45,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log("pantalla:",pantalla);
     if(pantalla == 2){
       updateQuestion();
-    }else{
-      console.log("cambiar Pantalla");
     }
   }, [pantalla]);
 
