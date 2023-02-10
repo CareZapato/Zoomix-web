@@ -5,7 +5,6 @@ import { urlBase } from '../const';
 const nuevaPregunta = async () => {
   try {
     const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/pregunta/nuevaPregunta');
-    console.log(new Pregunta(response.data));
     return new Pregunta(response.data);
   } catch (error) {
     console.error(error);
@@ -15,7 +14,6 @@ const nuevaPregunta = async () => {
 const nuevaPreguntaOpenAI = async () => {
   try {
     const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/openai/askOpenAICategoria');
-    console.log(new Pregunta(response.data));
     return new Pregunta(response.data);
   } catch (error) {
     console.error(error);
@@ -25,7 +23,6 @@ const nuevaPreguntaOpenAI = async () => {
 const nuevaPreguntaCategoria = async (categoria: number) => {
   try {
     const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/pregunta/nuevaPregunta/'+categoria);
-    console.log(new Pregunta(response.data));
     return new Pregunta(response.data);
   } catch (error) {
     console.error(error);

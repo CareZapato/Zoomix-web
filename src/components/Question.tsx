@@ -35,7 +35,6 @@ const Question = (
   };
 
   useEffect(() => {
-    console.log("questionEnter:",question);
     if (!isActive) {
       setTimeout(() => {
         setIsActive(true);
