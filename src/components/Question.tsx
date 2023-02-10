@@ -24,27 +24,24 @@ const Question = (
     updateQuestion,
     BotonMenuPrincipalHandleClick,
     BotonPerfilHandleClick,
-    BotonAgregarPreguntaHandleClick,
+    BotonAgregarPreguntaHandleClick
   }
   : Props) => {
   const [isActive, setIsActive] = useState(true);
 
   const handleClick = () => {
     setIsActive(false);
-      setTimeout(() => {
-        console.log("desde componente Question");
-        updateQuestion();
-      // Aquí se podría realizar una llamada a la función que obtiene la siguiente pregunta
-    }, 500); // duración de la animación en milisegundos
+    updateQuestion();
   };
 
   useEffect(() => {
+    console.log("questionEnter:",question);
     if (!isActive) {
       setTimeout(() => {
         setIsActive(true);
       }, 500); // duración de la animación en milisegundos
     }
-  }, [isActive]);
+  }, [question]);
 
   return (
     <>
@@ -59,13 +56,14 @@ const Question = (
           BotonPerfilHandleClick = {BotonPerfilHandleClick}
           BotonAgregarPreguntaHandleClick ={BotonAgregarPreguntaHandleClick}
           currentScreen = {1}
+          color={backgroundColor}
         />
         <div className="question" >
             {question}
         </div>
         <footer>
           <Likes color={backgroundColor} likes={likes ? likes : undefined} />
-          <Autor autor={creator ? creator : undefined} />
+          <Autor color={backgroundColor} autor={creator ? creator : undefined} />
         </footer>
       </div>
       </>

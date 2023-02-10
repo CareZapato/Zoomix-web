@@ -3,7 +3,7 @@ import './App.css';
 import Question from './components/Question';
 import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
-import { nuevaPregunta, nuevaPreguntaCategoria } from './Services/PreguntaServices';
+import { nuevaPregunta, nuevaPreguntaCategoria, nuevaPreguntaOpenAI } from './Services/PreguntaServices';
 import AgregarPregunta from './components/AgregarPregunta/AgregarPregunta';
 import PantallaPrincipal from './components/PantallaPrincipal/PantallaPrincipal';
 import Perfil from './components/Perfil/Perfil';
@@ -16,7 +16,17 @@ const App = () => {
 
 
   const updateQuestion = async () => {
-    const pregunta = categoria != 0 ? await nuevaPreguntaCategoria(categoria) : await nuevaPregunta() ;
+    let pregunta;
+    if(categoria != 0){
+      if(categoria != 4){
+        pregunta = await nuevaPreguntaCategoria(categoria);
+      }else{
+        pregunta = await nuevaPreguntaOpenAI();
+      }
+      
+    }else{
+      pregunta = await nuevaPregunta();
+    }
     if(pregunta){
       setPregunta(pregunta);
     }
@@ -49,6 +59,10 @@ const App = () => {
       updateQuestion();
     }
   }, [pantalla]);
+
+  useEffect(() => {
+    console.log("cambia pregunta:",pregunta);
+  }, [pregunta]);
 
 
   if(!pantalla){

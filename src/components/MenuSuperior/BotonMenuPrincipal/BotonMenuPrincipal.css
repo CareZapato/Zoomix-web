@@ -2,11 +2,21 @@
     justify-content: flex-start;
     display:flex;
     margin: 2%;
-    background-color: blue;
+    background-color: white;
     height: 80px;
     width: 80px;
     border-radius: 50%;
-    border: 3px solid red;
-    border-style: solid;
-    border-color: rgba(201, 76, 76, 0.3)
+    border: 10px double black;
+    border-style: double;
+    transition: all 0.2s ease-in-out;
+}
+
+.boton-menu-principal:hover {
+    margin: 2%;
+    border-radius: 50%;
+    border: 15px solid black;
+    border-style: double;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
 }

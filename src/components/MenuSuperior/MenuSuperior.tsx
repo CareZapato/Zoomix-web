@@ -10,18 +10,22 @@ type Props = {
     BotonMenuPrincipalHandleClick: () => void;
     BotonPerfilHandleClick: () => void;
     BotonAgregarPreguntaHandleClick: () => void;
+    color?:string;
 }
 
 const MenuSuperior = ({ 
     BotonMenuPrincipalHandleClick, 
     BotonPerfilHandleClick, 
     BotonAgregarPreguntaHandleClick, 
-    currentScreen }: Props
+    currentScreen,
+    color 
+}: Props
 ) => {
     return (
         <div className="menu-superior">
             <BotonMenuPrincipal 
                 onClick={BotonMenuPrincipalHandleClick}
+                color={color}
             />
             <BotonAgregarPregunta 
                 onClick={BotonAgregarPreguntaHandleClick}

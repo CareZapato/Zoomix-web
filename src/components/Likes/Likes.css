@@ -1,4 +1,4 @@
-.card-floating {
+.card-floating-likes {
     background-color: #F5F5F5;
     border-radius: 10px;
     box-shadow: 0px 0px 25px #505050;
@@ -11,7 +11,7 @@
     left: 3%;
     padding: 0.5%;
     font-family: Impact, sans-serif;
-    width: 15%;
+    width: 120px;
 }
   
 .card-content {
@@ -22,12 +22,11 @@
   
 .likes-count {
     font-size: 200%;
-    padding-right: 5%;
+    padding-right: 5px;
 }
 
 .likes-count {
     font-size: 200%;
-    
 }
   
 .card-shadow {
@@ -38,8 +37,8 @@
     left: 0;
 }
   
-.card-floating img {
-    width: 20%;
-    height: 20%;
-    padding-left: 5%;
+.card-floating-likes img {
+    width: 25px;
+    height: 25px;
+    padding-left: 5px;
 }

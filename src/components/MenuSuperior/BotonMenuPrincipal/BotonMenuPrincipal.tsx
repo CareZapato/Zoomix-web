@@ -3,9 +3,10 @@ import './BotonMenuPrincipal.css';
 
 type Props = {
   onClick: () => void;
+  color?: string;
 }
 
-const BotonMenuPrincipal = ({ onClick }: Props) => {
+const BotonMenuPrincipal = ({ onClick, color }: Props) => {
 
   function handleClick(e: { stopPropagation: () => void; }) { 
     e.stopPropagation();
@@ -15,6 +16,10 @@ const BotonMenuPrincipal = ({ onClick }: Props) => {
   return (
     <button
       className="boton-menu-principal"
+      style= {{
+        color : color,
+        border: '1px solid rgba(0,255,0,0.3)'
+      }}
       onClick={handleClick}
     >
       Menu Principal
