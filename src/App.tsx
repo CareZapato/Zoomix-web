@@ -60,8 +60,8 @@ const App = () => {
     }
   }, [pantalla]);
 
+  
   useEffect(() => {
-    console.log("cambia pregunta:",pregunta);
   }, [pregunta]);
 
 
