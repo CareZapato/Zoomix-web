@@ -20,6 +20,15 @@ const nuevaPreguntaOpenAI = async () => {
   }
 }
 
+const nuevaPreguntaOpenAICategoria = async (categoria: number) => {
+  try {
+    const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/openai/askOpenAICategoria/'+categoria);
+    return new Pregunta(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const nuevaPreguntaCategoria = async (categoria: number) => {
   try {
     const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/pregunta/nuevaPregunta/'+categoria);
@@ -48,5 +57,6 @@ export {
     nuevaPregunta,
     agregarPregunta,
     nuevaPreguntaCategoria,
-    nuevaPreguntaOpenAI
+    nuevaPreguntaOpenAI,
+    nuevaPreguntaOpenAICategoria
 }

@@ -3,7 +3,7 @@ import './App.css';
 import Question from './components/Question';
 import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
-import { nuevaPregunta, nuevaPreguntaCategoria, nuevaPreguntaOpenAI } from './Services/PreguntaServices';
+import { nuevaPregunta, nuevaPreguntaCategoria, nuevaPreguntaOpenAI, nuevaPreguntaOpenAICategoria } from './Services/PreguntaServices';
 import AgregarPregunta from './components/AgregarPregunta/AgregarPregunta';
 import PantallaPrincipal from './components/PantallaPrincipal/PantallaPrincipal';
 import Perfil from './components/Perfil/Perfil';
@@ -14,26 +14,9 @@ const App = () => {
   const [pantalla, setPantalla] = useState(1);
   const [categoria, setCategoria] = useState(0);
 
-
-  const updateQuestion = async () => {
-    let pregunta;
-    if(categoria != 0){
-      if(categoria != 4){
-        pregunta = await nuevaPreguntaCategoria(categoria);
-      }else{
-        pregunta = await nuevaPreguntaOpenAI();
-      }
-      
-    }else{
-      pregunta = await nuevaPregunta();
-    }
-    if(pregunta){
-      setPregunta(pregunta);
-    }
-  };
-
   const menuPrincipal = () => {
     console.log("Menu Principal");
+    setPregunta(null);
     setPantalla(1);
   }
 
@@ -48,23 +31,42 @@ const App = () => {
   }
 
   const handleCategoriaSel = (cat:number) => {
-    console.log("handleCategoriaSel: ",cat);
+    setPregunta(null);
     setCategoria(cat);
-    updateQuestion();
     setPantalla(2);
+    // console.log("categoria: ",categoria);
+    // updateQuestion();
+    // setPantalla(2);
   }
 
   useEffect(() => {
     if(pantalla == 2){
       updateQuestion();
     }
+  }, [categoria]);
+
+  useEffect(() => {
+    if(pantalla == 2 && pregunta == null){
+      updateQuestion();
+      setPantalla(2);
+    }
   }, [pantalla]);
 
-  
   useEffect(() => {
   }, [pregunta]);
 
-
+  const updateQuestion = async () => {
+    let pregunta;
+    if(categoria != 0){
+      pregunta = await nuevaPreguntaOpenAICategoria(categoria);
+    }else{
+      pregunta = await nuevaPregunta();
+    }
+    if(pregunta){
+      setPregunta(pregunta);
+    }
+  };
+  
   if(!pantalla){
     return (<div>Espere por favor ...</div>)
   }
