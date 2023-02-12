@@ -34,16 +34,7 @@ const App = () => {
     setPregunta(null);
     setCategoria(cat);
     setPantalla(2);
-    // console.log("categoria: ",categoria);
-    // updateQuestion();
-    // setPantalla(2);
   }
-
-  useEffect(() => {
-    if(pantalla == 2){
-      updateQuestion();
-    }
-  }, [categoria]);
 
   useEffect(() => {
     if(pantalla == 2 && pregunta == null){
