@@ -14,6 +14,7 @@ type Props = {
   BotonMenuPrincipalHandleClick: () => void;
   BotonPerfilHandleClick:() => void;
   BotonAgregarPreguntaHandleClick: () => void;
+  guardarPregunta: () => void;
 };
 
 const Question = (
@@ -24,7 +25,8 @@ const Question = (
     updateQuestion,
     BotonMenuPrincipalHandleClick,
     BotonPerfilHandleClick,
-    BotonAgregarPreguntaHandleClick
+    BotonAgregarPreguntaHandleClick,
+    guardarPregunta
   }
   : Props) => {
   const [isActive, setIsActive] = useState(true);
@@ -61,7 +63,11 @@ const Question = (
             {question}
         </div>
         <footer>
-          <Likes color={backgroundColor} likes={likes ? likes : undefined} />
+          <Likes 
+            color={backgroundColor} 
+            likes={likes ? likes : undefined} 
+            guardarPregunta={guardarPregunta}
+          />
           <Autor color={backgroundColor} autor={creator ? creator : undefined} />
         </footer>
       </div>

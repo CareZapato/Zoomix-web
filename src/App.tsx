@@ -3,7 +3,7 @@ import './App.css';
 import Question from './components/Question';
 import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
-import { nuevaPregunta, nuevaPreguntaCategoria, nuevaPreguntaOpenAI, nuevaPreguntaOpenAICategoria } from './Services/PreguntaServices';
+import { nuevaPregunta, guardarPregunta, nuevaPreguntaOpenAICategoria } from './Services/PreguntaServices';
 import AgregarPregunta from './components/AgregarPregunta/AgregarPregunta';
 import PantallaPrincipal from './components/PantallaPrincipal/PantallaPrincipal';
 import Perfil from './components/Perfil/Perfil';
@@ -57,6 +57,15 @@ const App = () => {
       setPregunta(pregunta);
     }
   };
+
+  const saveQuestion = async () => {
+    console.log("saveQuestion");
+    if(pregunta){
+      const resp = await guardarPregunta(pregunta);
+    }
+    
+    
+  };
   
   if(!pantalla){
     return (<div>Espere por favor ...</div>)
@@ -86,6 +95,7 @@ const App = () => {
                 BotonMenuPrincipalHandleClick={menuPrincipal}
                 BotonPerfilHandleClick={menuPerfil}
                 BotonAgregarPreguntaHandleClick={agregarPregunta}
+                guardarPregunta={saveQuestion}
               />
             </div>
           ); 

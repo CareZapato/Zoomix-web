@@ -53,10 +53,29 @@ async function agregarPregunta(pregunta:Pregunta){
   }
 }
 
+const guardarPregunta = async (pregunta: Pregunta) => {
+  try {
+    console.log(JSON.stringify(pregunta));
+    const response = await fetch(
+      urlBase+'/pregunta/insertarPregunta',
+      {method: 'POST',
+      body: JSON.stringify(pregunta),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    console.log("response: ",response);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export {
     nuevaPregunta,
     agregarPregunta,
     nuevaPreguntaCategoria,
     nuevaPreguntaOpenAI,
-    nuevaPreguntaOpenAICategoria
+    nuevaPreguntaOpenAICategoria,
+    guardarPregunta
 }

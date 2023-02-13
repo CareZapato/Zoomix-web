@@ -54,7 +54,7 @@ const AgregarPregunta: React.FC<Props> = ({
     const json:Pregunta = {
       texto,
       likes: 0,
-      activado: true,
+      activo: true,
       categoria: {
         categoriaId
       },
