@@ -55,7 +55,6 @@ async function agregarPregunta(pregunta:Pregunta){
 
 const guardarPregunta = async (pregunta: Pregunta) => {
   try {
-    console.log(JSON.stringify(pregunta));
     const response = await fetch(
       urlBase+'/pregunta/insertarPregunta',
       {method: 'POST',
@@ -64,7 +63,6 @@ const guardarPregunta = async (pregunta: Pregunta) => {
         'Content-Type': 'application/json',
       }
     });
-    console.log("response: ",response);
     return response;
   } catch (error) {
     console.error(error);
