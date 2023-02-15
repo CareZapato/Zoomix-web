@@ -4,12 +4,10 @@ import { OPACITY_PERCENTAGE } from "../constants";
 import Likes from "./Likes/Likes";
 import Autor from "./Autor/Autor";
 import MenuSuperior from './MenuSuperior/MenuSuperior';
+import { Pregunta } from '../models/Pregunta/Pregunta';
 
 type Props = {
-  question?: string;
-  creator?: string;
-  likes?: number;
-  backgroundColor?: string;
+  pregunta?: Pregunta;
   updateQuestion: () => void;
   BotonMenuPrincipalHandleClick: () => void;
   BotonPerfilHandleClick:() => void;
@@ -18,10 +16,8 @@ type Props = {
 };
 
 const Question = (
-  { question, 
-    creator, 
-    likes, 
-    backgroundColor, 
+  { 
+    pregunta,
     updateQuestion,
     BotonMenuPrincipalHandleClick,
     BotonPerfilHandleClick,
@@ -42,13 +38,13 @@ const Question = (
         setIsActive(true);
       }, 500); // duración de la animación en milisegundos
     }
-  }, [question]);
+  }, [pregunta]);
 
   return (
     <>
       <div className="black-screen" />
       <div style={{ 
-        backgroundColor: backgroundColor,
+        backgroundColor: pregunta?.categoria?.color?.nombre,
         opacity: isActive ? 1 : OPACITY_PERCENTAGE,
         transition: "opacity 500ms", 
       }} onClick={handleClick}>
@@ -57,18 +53,18 @@ const Question = (
           BotonPerfilHandleClick = {BotonPerfilHandleClick}
           BotonAgregarPreguntaHandleClick ={BotonAgregarPreguntaHandleClick}
           currentScreen = {1}
-          color={backgroundColor}
+          color={pregunta?.categoria?.color?.nombre}
         />
         <div className="question" >
-            {question}
+            {pregunta?.texto}
         </div>
-        <footer>
+        <footer className="footer-style">
           <Likes 
-            color={backgroundColor} 
-            likes={likes ? likes : undefined} 
+            color={pregunta?.categoria?.color?.nombre} 
+            likes={pregunta?.likes ? pregunta?.likes : undefined} 
             guardarPregunta={guardarPregunta}
           />
-          <Autor color={backgroundColor} autor={creator ? creator : undefined} />
+          {/* <Autor color={backgroundColor} autor={creator ? creator : undefined} /> */}
         </footer>
       </div>
       </>

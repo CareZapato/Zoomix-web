@@ -1,6 +1,8 @@
 import React from 'react';
 import './BotonMenuPrincipal.css';
 
+import home from "../../../img/home.png"
+
 type Props = {
   onClick: () => void;
   color?: string;
@@ -12,17 +14,13 @@ const BotonMenuPrincipal = ({ onClick, color }: Props) => {
     e.stopPropagation();
     onClick();
 } 
-
+const filter = "opacity(0.99) drop-shadow(0 0 0 white) brightness(100)";
   return (
     <button
       className="boton-menu-principal"
-      style= {{
-        color : color,
-        border: '1px solid rgba(0,255,0,0.3)'
-      }}
       onClick={handleClick}
     >
-      Menu Principal
+      <img src={home} />
     </button>
   );
 };

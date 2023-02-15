@@ -87,10 +87,7 @@ const App = () => {
           return (
             <div>
               <Question
-                question={pregunta.texto}
-                creator={pregunta.jugador?.nombre}
-                likes={pregunta.likes}
-                backgroundColor={pregunta.categoria?.color?.nombre}
+                pregunta={pregunta}
                 updateQuestion={updateQuestion}
                 BotonMenuPrincipalHandleClick={menuPrincipal}
                 BotonPerfilHandleClick={menuPerfil}
