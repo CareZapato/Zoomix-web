@@ -27,9 +27,9 @@ const MenuSuperior = ({
                 onClick={BotonMenuPrincipalHandleClick}
                 color={color}
             />
-            <BotonAgregarPregunta 
+            {/* <BotonAgregarPregunta 
                 onClick={BotonAgregarPreguntaHandleClick}
-            />
+            /> */}
             <BotonPerfil 
                 onClick={BotonPerfilHandleClick}
             />
