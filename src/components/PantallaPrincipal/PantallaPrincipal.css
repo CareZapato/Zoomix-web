@@ -82,8 +82,8 @@
     -webkit-text-stroke: 1.1px black;
     padding: 20px;
     margin-bottom: 15px;
-    width: 200px;
-    font-size: 18px;
+    width: 280px;
+    font-size: 23px;
     border-radius: 35px;
     border-width: 5px;
     font-family: 'Arial Black', cursive;
@@ -97,9 +97,9 @@
     color: white;
     -webkit-text-stroke: 1.1px black;
     padding: 25px;
-    width: 200px;
+    width: 290px;
     margin-bottom: 15px;
-    font-size: 21px;
+    font-size: 25px;
     border-radius: 35px;
     border-width: 5px;
     font-family: 'Arial Black', cursive;
@@ -107,7 +107,6 @@
     border-width: 3.1px 2.3px 4px 3.8px;
     border-radius: 84% 3.2% 95% 5%/4% 94% 3% 95%;
     transform: rotate(-0.8deg);
-    width: 70%;
 }
 
 .footer-version {
