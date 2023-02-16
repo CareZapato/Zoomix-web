@@ -4,34 +4,59 @@ import { OPACITY_PERCENTAGE } from "../constants";
 import Likes from "./Likes/Likes";
 import Autor from "./Autor/Autor";
 import MenuSuperior from './MenuSuperior/MenuSuperior';
+import { Pregunta } from '../models/Pregunta/Pregunta';
+import OpcionesExtras from './OpcionesExtras/OpcionesExtras';
 
 type Props = {
-  question?: string;
-  creator?: string;
-  likes?: number;
-  backgroundColor?: string;
+  pregunta?: Pregunta;
   updateQuestion: () => void;
   BotonMenuPrincipalHandleClick: () => void;
   BotonPerfilHandleClick:() => void;
   BotonAgregarPreguntaHandleClick: () => void;
+  guardarPregunta: () => void;
 };
 
 const Question = (
-  { question, 
-    creator, 
-    likes, 
-    backgroundColor, 
+  { 
+    pregunta,
     updateQuestion,
     BotonMenuPrincipalHandleClick,
     BotonPerfilHandleClick,
-    BotonAgregarPreguntaHandleClick
+    BotonAgregarPreguntaHandleClick,
+    guardarPregunta
   }
   : Props) => {
   const [isActive, setIsActive] = useState(true);
+  const [isActiveText, setIsActiveText] = useState(false);
+  const [text, setText] = useState(pregunta?.texto);
+  const [color, setColor] = useState(pregunta?.categoria?.color?.nombre);
 
   const handleClick = () => {
     setIsActive(false);
     updateQuestion();
+  };
+
+  const handleClickConsecuencia = () => {
+    setText(pregunta?.concecuencia);
+    setTimeout(() => {
+      setText(pregunta?.texto);
+    }, 3500);
+  };
+  
+  const handleClickRespuesta = () => {
+    setText(pregunta?.respuesta);
+    setTimeout(() => {
+      setText(pregunta?.texto);
+    }, 3500);
+  };
+
+  const handleClickColor = () => {
+    setText(pregunta?.explicacionColorOpenAI);
+    setColor(pregunta?.colorOpenAI);
+    setTimeout(() => {
+      setText(pregunta?.texto);
+      setColor(pregunta?.categoria?.color?.nombre);
+    }, 3500);
   };
 
   useEffect(() => {
@@ -40,13 +65,13 @@ const Question = (
         setIsActive(true);
       }, 500); // duración de la animación en milisegundos
     }
-  }, [question]);
+  }, [pregunta]);
 
   return (
     <>
       <div className="black-screen" />
       <div style={{ 
-        backgroundColor: backgroundColor,
+        backgroundColor: color,
         opacity: isActive ? 1 : OPACITY_PERCENTAGE,
         transition: "opacity 500ms", 
       }} onClick={handleClick}>
@@ -55,14 +80,24 @@ const Question = (
           BotonPerfilHandleClick = {BotonPerfilHandleClick}
           BotonAgregarPreguntaHandleClick ={BotonAgregarPreguntaHandleClick}
           currentScreen = {1}
-          color={backgroundColor}
+          color={color}
         />
-        <div className="question" >
-            {question}
+        <div className="question">
+            {text}
         </div>
-        <footer>
-          <Likes color={backgroundColor} likes={likes ? likes : undefined} />
-          <Autor color={backgroundColor} autor={creator ? creator : undefined} />
+        <OpcionesExtras 
+          pregunta={pregunta}
+          sendConsecuencia={handleClickConsecuencia}
+          sendRespuesta={handleClickRespuesta}
+          sendColor={handleClickColor}
+        />
+        <footer className="footer-style">
+          <Likes 
+            color={color} 
+            likes={pregunta?.likes ? pregunta?.likes : undefined} 
+            guardarPregunta={guardarPregunta}
+          />
+          {/* <Autor color={backgroundColor} autor={creator ? creator : undefined} /> */}
         </footer>
       </div>
       </>

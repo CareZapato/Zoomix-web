@@ -20,6 +20,15 @@ const nuevaPreguntaOpenAI = async () => {
   }
 }
 
+const nuevaPreguntaOpenAICategoria = async (categoria: number) => {
+  try {
+    const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/openai/askOpenAICategoria/'+categoria);
+    return new Pregunta(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const nuevaPreguntaCategoria = async (categoria: number) => {
   try {
     const response: AxiosResponse<Pregunta> = await axios.get(urlBase+'/pregunta/nuevaPregunta/'+categoria);
@@ -44,9 +53,27 @@ async function agregarPregunta(pregunta:Pregunta){
   }
 }
 
+const guardarPregunta = async (pregunta: Pregunta) => {
+  try {
+    const response = await fetch(
+      urlBase+'/pregunta/insertarPregunta',
+      {method: 'POST',
+      body: JSON.stringify(pregunta),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export {
     nuevaPregunta,
     agregarPregunta,
     nuevaPreguntaCategoria,
-    nuevaPreguntaOpenAI
+    nuevaPreguntaOpenAI,
+    nuevaPreguntaOpenAICategoria,
+    guardarPregunta
 }
