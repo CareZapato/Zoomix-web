@@ -62,6 +62,7 @@ const Question = (
   useEffect(() => {
     if (!isActive) {
       setTimeout(() => {
+        setText(pregunta?.texto);
         setIsActive(true);
       }, 500); // duración de la animación en milisegundos
     }

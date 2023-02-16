@@ -47,14 +47,14 @@ const App = () => {
   }, [pregunta]);
 
   const updateQuestion = async () => {
-    let pregunta;
+    let preguntaNueva;
     if(categoria != 0){
-      pregunta = await nuevaPreguntaOpenAICategoria(categoria);
-    }else{
-      pregunta = await nuevaPregunta();
+      preguntaNueva = await nuevaPreguntaOpenAICategoria(categoria);
+      }else{
+      preguntaNueva = await nuevaPregunta();
     }
-    if(pregunta){
-      setPregunta(pregunta);
+    if(preguntaNueva){
+      setPregunta(preguntaNueva);
     }
   };
 
@@ -63,8 +63,6 @@ const App = () => {
     if(pregunta){
       const resp = await guardarPregunta(pregunta);
     }
-    
-    
   };
   
   if(!pantalla){

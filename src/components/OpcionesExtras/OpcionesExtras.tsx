@@ -37,8 +37,8 @@ const OpcionesExtras = (
       <div className="floating-objects">
         {
           pregunta?.concecuencia &&
-          pregunta?.concecuencia !== "*" &&
-          pregunta?.concecuencia !== "✨"  ? 
+          pregunta?.concecuencia.trim() !== "*" &&
+          pregunta?.concecuencia.trim() !== "✨"  ? 
           <div
             onClick={handleClickConsecuencia}
             className="object">
@@ -47,8 +47,8 @@ const OpcionesExtras = (
         }
         {
           pregunta?.respuesta &&
-          pregunta?.respuesta !== "*" &&
-          pregunta?.respuesta !== "✨"  ? 
+          pregunta?.respuesta.trim() !== "*" &&
+          pregunta?.respuesta.trim() !== "✨"  ? 
           <div
             onClick={handleClickRespuesta}
             className="object">
@@ -57,8 +57,8 @@ const OpcionesExtras = (
         }
         {
           pregunta?.colorOpenAI &&
-          pregunta?.colorOpenAI !== "*" &&
-          pregunta?.colorOpenAI !== "✨"  ?
+          pregunta?.colorOpenAI.trim() !== "*" &&
+          pregunta?.colorOpenAI.trim() !== "✨"  ?
           <div
             onClick={handleClickColor}
             className="object">
