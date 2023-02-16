@@ -6,13 +6,15 @@ type Props = {
   pregunta?: Pregunta;
   sendConsecuencia: () => void;
   sendRespuesta: () => void;
+  sendColor: () => void;
 };
 
 const OpcionesExtras = (
     {
       pregunta,
       sendConsecuencia,
-      sendRespuesta
+      sendRespuesta,
+      sendColor
     } : Props) => {
 
   const handleClickConsecuencia = (e: { stopPropagation: () => void; }) => {
@@ -23,6 +25,11 @@ const OpcionesExtras = (
   const handleClickRespuesta = (e: { stopPropagation: () => void; }) => {
     e.stopPropagation();
     sendRespuesta();
+  };
+
+  const handleClickColor = (e: { stopPropagation: () => void; }) => {
+    e.stopPropagation();
+    sendColor();
   };
 
   return (
@@ -43,6 +50,14 @@ const OpcionesExtras = (
             onClick={handleClickRespuesta}
             className="object">
             Respuesta
+          </div> : null
+        }
+        {
+          pregunta?.colorOpenAI ? 
+          <div
+            onClick={handleClickColor}
+            className="object">
+            Color
           </div> : null
         }
         

@@ -27,7 +27,9 @@ const Question = (
   }
   : Props) => {
   const [isActive, setIsActive] = useState(true);
+  const [isActiveText, setIsActiveText] = useState(false);
   const [text, setText] = useState(pregunta?.texto);
+  const [color, setColor] = useState(pregunta?.categoria?.color?.nombre);
 
   const handleClick = () => {
     setIsActive(false);
@@ -48,6 +50,15 @@ const Question = (
     }, 3500);
   };
 
+  const handleClickColor = () => {
+    setText(pregunta?.explicacionColorOpenAI);
+    setColor(pregunta?.colorOpenAI);
+    setTimeout(() => {
+      setText(pregunta?.texto);
+      setColor(pregunta?.categoria?.color?.nombre);
+    }, 3500);
+  };
+
   useEffect(() => {
     if (!isActive) {
       setTimeout(() => {
@@ -60,7 +71,7 @@ const Question = (
     <>
       <div className="black-screen" />
       <div style={{ 
-        backgroundColor: pregunta?.categoria?.color?.nombre,
+        backgroundColor: color,
         opacity: isActive ? 1 : OPACITY_PERCENTAGE,
         transition: "opacity 500ms", 
       }} onClick={handleClick}>
@@ -69,19 +80,20 @@ const Question = (
           BotonPerfilHandleClick = {BotonPerfilHandleClick}
           BotonAgregarPreguntaHandleClick ={BotonAgregarPreguntaHandleClick}
           currentScreen = {1}
-          color={pregunta?.categoria?.color?.nombre}
+          color={color}
         />
-        <div className="question" >
+        <div className="question">
             {text}
         </div>
         <OpcionesExtras 
           pregunta={pregunta}
           sendConsecuencia={handleClickConsecuencia}
           sendRespuesta={handleClickRespuesta}
+          sendColor={handleClickColor}
         />
         <footer className="footer-style">
           <Likes 
-            color={pregunta?.categoria?.color?.nombre} 
+            color={color} 
             likes={pregunta?.likes ? pregunta?.likes : undefined} 
             guardarPregunta={guardarPregunta}
           />
