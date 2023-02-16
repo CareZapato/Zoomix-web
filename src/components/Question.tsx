@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./Question.css";
-import { OPACITY_PERCENTAGE } from "../constants";
+import { OPACITY_PERCENTAGE, EXTRAS_TIME_SHOW } from "../constants";
 import Likes from "./Likes/Likes";
 import Autor from "./Autor/Autor";
 import MenuSuperior from './MenuSuperior/MenuSuperior';
@@ -40,14 +40,14 @@ const Question = (
     setText(pregunta?.concecuencia);
     setTimeout(() => {
       setText(pregunta?.texto);
-    }, 3500);
+    }, EXTRAS_TIME_SHOW);
   };
   
   const handleClickRespuesta = () => {
     setText(pregunta?.respuesta);
     setTimeout(() => {
       setText(pregunta?.texto);
-    }, 3500);
+    }, EXTRAS_TIME_SHOW);
   };
 
   const handleClickColor = () => {
@@ -56,7 +56,7 @@ const Question = (
     setTimeout(() => {
       setText(pregunta?.texto);
       setColor(pregunta?.categoria?.color?.nombre);
-    }, 3500);
+    }, EXTRAS_TIME_SHOW);
   };
 
   useEffect(() => {

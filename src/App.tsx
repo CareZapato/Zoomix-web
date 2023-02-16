@@ -14,6 +14,14 @@ const App = () => {
   const [pantalla, setPantalla] = useState(1);
   const [categoria, setCategoria] = useState(0);
 
+  useEffect(() => {
+    const element = document.documentElement;
+    
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    }
+  }, []);
+
   const menuPrincipal = () => {
     console.log("Menu Principal");
     setPregunta(null);
