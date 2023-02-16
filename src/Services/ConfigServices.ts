@@ -3,8 +3,8 @@ import { urlBase } from '../const';
 
 const getConfig = async (value:string) => {
   try {
-    const response: string = await axios.get(urlBase+'/config/'+value);
-    return response;
+    const response = await axios.get(urlBase+'/config/value/'+value);
+    return response.data;
   } catch (error) {
     console.error(error);
   }

@@ -3,24 +3,17 @@ import './App.css';
 import Question from './components/Question';
 import { useState, useEffect } from 'react';
 import { Pregunta } from './models/Pregunta/Pregunta';
-import { nuevaPregunta, guardarPregunta, nuevaPreguntaOpenAICategoria } from './Services/PreguntaServices';
+import { nuevaPreguntaCategoria, guardarPregunta, nuevaPreguntaOpenAICategoria } from './Services/PreguntaServices';
 import AgregarPregunta from './components/AgregarPregunta/AgregarPregunta';
 import PantallaPrincipal from './components/PantallaPrincipal/PantallaPrincipal';
 import Perfil from './components/Perfil/Perfil';
+import { getConfig } from './Services/ConfigServices';
 
 const App = () => {
   
   const [pregunta, setPregunta] = useState<Pregunta | null>(null);
   const [pantalla, setPantalla] = useState(1);
   const [categoria, setCategoria] = useState(0);
-
-  useEffect(() => {
-    const element = document.documentElement;
-    
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    }
-  }, []);
 
   const menuPrincipal = () => {
     console.log("Menu Principal");
@@ -57,13 +50,24 @@ const App = () => {
   const updateQuestion = async () => {
     let preguntaNueva;
     if(categoria != 0){
-      preguntaNueva = await nuevaPreguntaOpenAICategoria(categoria);
-      }else{
-      preguntaNueva = await nuevaPregunta();
+      const rate = await getOPENAI_QUESTION_RATE();
+      const value = (Math.random());
+      if(rate){
+        if(value < Number.parseFloat(rate)){
+          preguntaNueva = await nuevaPreguntaOpenAICategoria(categoria);
+        }else{
+          preguntaNueva = await nuevaPreguntaCategoria(categoria);
+        }
+      }
     }
     if(preguntaNueva){
       setPregunta(preguntaNueva);
     }
+  };
+
+  const getOPENAI_QUESTION_RATE = async () => {
+    const openai_question_rate = await getConfig("OPENAI_QUESTION_RATE");
+    return openai_question_rate;
   };
 
   const saveQuestion = async () => {
